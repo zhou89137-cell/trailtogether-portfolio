@@ -6,6 +6,28 @@
 
 TrailTogether brings activity discovery, participant communication, shared photos, and event-day attendance into one application. A SvelteKit web experience helps people explore outdoor activities, while a Java Swing Door Station supports the practical work of welcoming guests and recording attendance.
 
+## Application preview
+
+### Discover your next adventure
+
+![TrailTogether homepage with activity search](assets/homepage.png)
+
+A clear entry point for finding trails and exploring group activities.
+
+### Explore the activity details
+
+![Activity details with route summary and registration status](assets/activity-details.png)
+
+Route information, difficulty, meeting arrangements, available places, and registration status in one view. The displayed sample activity has finished.
+
+### Share a trail moment
+
+![Photo Wall upload and caption interface](assets/photo-wall.png)
+
+Image upload and an optional caption bring shared memories into the activity experience. This screenshot shows the submission form; participant-uploaded photos and comments are excluded.
+
+Screenshots were captured from the local application. Browser controls and unrelated personal information have been cropped out. The organiser name belongs to a seeded demo account.
+
 ## Project highlights
 
 ### A connected activity experience
@@ -107,4 +129,3 @@ Physical printer output and PDF saving require verification on the intended comp
 ---
 
 Portfolio profile: [zhou89137-cell](https://github.com/zhou89137-cell)
-
