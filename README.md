@@ -1,71 +1,110 @@
 # TrailTogether
-### Outdoor activity discovery, shared memories, and event-day check-in
 
-**University of Auckland · PGCertIT team project · 2026**  
-**Portfolio by [zhou89137-cell](https://github.com/zhou89137-cell)**
+### Explore the trails. Find your people.
 
-TrailTogether is a team-built application for discovering outdoor activities, exploring event details, sharing activity photos, and supporting guests on the day of an event. It combines a web application with a Java desktop Door Station for attendance workflows.
+**Outdoor activity platform · Web + Java desktop · University of Auckland team project**
 
-My work connected the participant experience—from browsing activities and receiving emails—to the practical tasks of selecting guests, checking them in, and preparing name badges.
+TrailTogether brings activity discovery, participant communication, shared photos, and event-day attendance into one application. A SvelteKit web experience helps people explore outdoor activities, while a Java Swing Door Station supports the practical work of welcoming guests and recording attendance.
 
-> This repository is a project case study. It contains documentation only; the team application's source code, participant data, and internal project materials are not distributed here.
+## Project highlights
 
-## At a glance
+### A connected activity experience
 
-| | |
+The homepage and activity detail pages provide a starting point for discovering outdoor events and exploring their details. Participant-facing pages, invitation links, and event emails connect the browsing experience with the next steps in an activity.
+
+### Shared memories through the Photo Wall
+
+An activity photo gallery brings participant photos into the event experience, giving people a place to revisit and share memories from their activities.
+
+### Invitations and confirmation emails
+
+Email functionality supports invitations and registration confirmations, with links that lead back to the relevant activity or personal invitation. Confirmation messages can include a check-in QR code and a manual code for arrival at the event.
+
+### A desktop Door Station for event staff
+
+The Java Swing client provides an attendance interface alongside the web application. Staff can scan or enter a check-in code, or filter the guest list and check in a selected guest.
+
+Guest search supports names, check-in codes, and registration numbers. This gives staff a practical alternative when a participant cannot present a QR code.
+
+### Attendance workflows that tolerate interrupted connectivity
+
+The Door Station caches the guest list and queues check-ins locally until the server confirms them. Cached guest search remains available offline, and pending attendance records can be synchronised when connectivity returns.
+
+### Name badges from the guest list
+
+After a guest's check-in is confirmed by the server, staff can preview a 90 × 55 mm name badge and open the operating system's print dialog. The badge includes the guest name and event title, with text wrapping and sizing for longer entries.
+
+The preview and printable output use the same drawing logic. Printing supports the system's available printers, including an installed PDF printer.
+
+### Organiser-controlled station access
+
+An organiser pairs a Door Station using a single-use code with a limited lifetime. Station identity persists between desktop sessions, and organisers can revoke station access from the web interface.
+
+## Typical journeys
+
+| Participant | Event staff |
 | :--- | :--- |
-| **Context** | University of Auckland postgraduate IT team project |
-| **Product** | Outdoor activity platform with an event check-in desktop client |
-| **My focus** | Homepage, activity detail page, photo gallery, email functionality, guest selection/check-in, and badge printing |
-| **Technologies used in the project** | Svelte / SvelteKit, JavaScript, Node.js, Express, SQLite, Nodemailer, Java Swing |
-| **Portfolio scope** | A description of the project and my contributions; no runnable application is included |
+| Discover an outdoor activity | Pair a Door Station with an event |
+| Explore activity details | Download and search the guest list |
+| Receive an invitation or confirmation email | Scan a code or select a guest |
+| Present a check-in code on arrival | Record check-in and synchronise attendance |
+| View or share activity photos | Preview and print a confirmed guest's badge |
 
-## The experience
+## Technology stack
 
-**Discover → Explore → Receive event emails → Check in → Share memories**
+| Layer | Technologies | Purpose |
+| :--- | :--- | :--- |
+| Web application | Svelte, SvelteKit, JavaScript, Vite | Activity discovery, detail pages, photos, and organiser interfaces |
+| Backend | Node.js, Express | Application APIs and server-side workflows |
+| Database | SQLite | Persistent application data |
+| Email | Nodemailer | Invitations and confirmation messages |
+| Desktop application | Java 17, Swing | Guest search, attendance, and name-badge preparation |
+| Printing | Java AWT printing API | Badge preview and system printing integration |
 
-Participants can browse activities, read event details, and view or share photos. Email functionality supports communication around invitations and confirmations. At the event, the Door Station provides a desktop workflow for finding guests, recording attendance, and preparing name badges.
+## Architecture at a glance
+
+```text
+SvelteKit web application ──┐
+                           ├── Express API ── SQLite
+Java Swing Door Station ───┘        │
+       │                           └── Email delivery via Nodemailer
+       ├── Cached guest list
+       ├── Pending check-in queue
+       └── Badge preview → System print dialog
+```
+
+## Engineering strengths
+
+- **Web and desktop integration:** Browser and desktop clients support different parts of the same event workflow.
+- **Offline attendance support:** Local caching and queued check-ins accommodate temporary connectivity interruptions.
+- **Multiple check-in paths:** QR/manual codes and guest selection provide alternatives at the welcome desk.
+- **Connected communication:** Email links bridge participant messages and the relevant application pages.
+- **Reusable badge rendering:** Shared drawing logic keeps badge preview and printable output consistent.
 
 ## My contributions
 
-| Area | What I worked on | Purpose |
-| :--- | :--- | :--- |
-| **Homepage** | Built the homepage and its activity discovery interface. | Give visitors a clear starting point for exploring activities. |
-| **Activity detail page** | Developed the page presenting an individual activity and its related information. | Help participants understand an activity before taking the next step. |
-| **Photo gallery** | Implemented the activity photo gallery / Photo Wall experience. | Bring shared event memories into the activity experience. |
-| **Email functionality** | Worked on invitation and confirmation emails, including links back to the relevant activity or invitation. | Connect email communication with the web application. |
-| **Door Station guest selection and check-in** | Added guest filtering, selection, and check-in for the selected guest in the Java desktop interface. | Help event staff locate a guest and record their arrival. |
-| **Badge printing** | Added a selected-guest name-badge preview and printing workflow using the system print dialog. | Prepare a guest badge from the attendance interface. |
+Within the team project, I worked on the following areas:
 
-These are my contributions within a shared team project. Other application features and the overall product were developed collaboratively with teammates.
-
-## How the pieces fit together
-
-| Layer | Role in the project |
+| Area | Contribution |
 | :--- | :--- |
-| **SvelteKit web application** | Activity browsing, detail pages, and photo gallery interactions |
-| **Node.js / Express backend** | Application APIs and server-side workflows |
-| **SQLite** | Application data storage |
-| **Nodemailer** | Email delivery integration |
-| **Java Swing Door Station** | Desktop guest selection, check-in, and name-badge interface |
+| **Homepage** | Built the homepage and activity discovery interface. |
+| **Activity detail page** | Developed the page presenting individual activities and their details. |
+| **Photo gallery / Photo Wall** | Implemented the activity photo gallery experience. |
+| **Email functionality** | Worked on invitation and confirmation emails, including links to the relevant activity or personal invitation. |
+| **Door Station guest selection and check-in** | Added guest filtering, guest selection, and check-in for the selected guest in the Java desktop interface. |
+| **Name-badge printing** | Added selected-guest badge preview and printing through the operating system print dialog. |
 
-This overview describes the project at a high level and omits deployment configuration, internal endpoints, and operational credentials.
+These contributions form part of a collaboratively developed application; the project highlights above describe the team's overall product.
 
-## Engineering focus
+## About this repository
 
-- **Connected user journeys:** Link discovery, activity details, photos, and email entry points into a coherent experience.
-- **Web and desktop integration:** Contribute to both the browser application and a Java desktop client serving event staff.
-- **Practical interface design:** Keep guest selection, check-in, and badge preparation close together in the event-day workflow.
-- **Team delivery:** Develop defined features within a shared application while keeping individual contribution and team ownership clear.
+TrailTogether was developed as a University of Auckland PGCertIT team project. This repository presents the application as a portfolio case study and describes project-level capabilities.
 
-## Project status and access
+The portfolio contains documentation only. Application source code, credentials, participant records, and confidential screenshots are not included. The features described reflect the inspected local implementation; this page does not establish which changes have been merged into the team's remote repository.
 
-TrailTogether was developed as an academic team project. This case study describes my contribution areas and does not claim production deployment, measured user adoption, or independent ownership of the full application.
+Physical printer output and PDF saving require verification on the intended computer. No production deployment, usage metrics, or performance benchmarks are claimed.
 
-Badge preview and the system printing integration are implemented; physical printer output is not presented here as a verified result.
+---
 
-No application demo, source-code download, or participant screenshots are included in this public portfolio.
+Portfolio profile: [zhou89137-cell](https://github.com/zhou89137-cell)
 
-## Connect
-
-View my GitHub profile: **[zhou89137-cell](https://github.com/zhou89137-cell)**
